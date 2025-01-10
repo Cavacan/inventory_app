@@ -3,21 +3,13 @@ Rails.application.routes.draw do
   get 'email_change_requests/create'
   get 'mypage/show'
   namespace :admin do
-    get 'replenishments/index'
-    get 'replenishments/update'
-    get 'stocks/index'
-    get 'stocks/update'
-    get 'products/index'
-    get 'products/new'
-    get 'products/create'
-    get 'products/edit'
-    get 'products/update'
-    get 'products/destroy'
-    get 'users/index'
-    get 'users/create'
-    get 'users/update'
-    get 'users/destroy'
-    get 'dashboard/index'
+    root 'dashboard#index'
+    resources :users, only: [:index, :edit, :create, :update, :destroy]
+    resources :products, except: [:show]
+    resources :stocks, only: [:index] do
+      patch :replenish, on: :member
+    end
+    resources :replenishments, only: [:index, :update]
   end
   root "posts#index"
   resources :orders

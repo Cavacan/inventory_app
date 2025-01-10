@@ -1,2 +1,34 @@
 <h1>Admin::Products#new</h1>
-<p>Find me in app/views/admin/products/new.html.erb</p>
+<%= form_with model: Product.new, url: admin_products_path, local: true do |f| %>
+  <div>
+    <%= f.label :code, '商品分類コード' %>
+    <%= f.text_field :code, value: 'A' %>
+  </div>
+  <div>
+    <%= f.label :name, '商品名' %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :max_quantity, '最大数量' %>
+    <%= f.text_field :max_quantity, value:9999 %>
+  </div>
+  <div>
+    <%= f.label :price, '価格' %>
+    <%= f.number_field :price %>
+  </div>
+  <div>
+    <%= f.label :start_date, '開始日' %>
+    <%= f.date_field :start_date %>
+  </div>
+  <div>
+    <%= f.label :end_date, '終了日' %>
+    <%= f.date_field :end_date %>
+  </div>
+  <div>
+    <%= f.label :version, '商品バージョン' %>
+    <%= f.text_field :version %>
+  </div>
+  <div>
+    <%= f.submit '作成' %>
+  </div>
+<% end %>

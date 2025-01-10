@@ -1,2 +1,51 @@
-<h1>Admin::Products#edit</h1>
-<p>Find me in app/views/admin/products/edit.html.erb</p>
+<h1>商品管理</h1>
+<%= form_with model:@product, url: admin_product_path(@product), local: true do |f| %>
+  <div>
+    <%= f.label :code, '商品分類コード' %><br>
+    <%= f.text_field :code, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :name, '商品名' %><br>
+    <%= f.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :max_quantity, '最大数量' %><br>
+    <%= f.number_field :max_quantity, min: 1, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :price, '価格' %><br>
+    <%= f.number_field :price, min: 0, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :start_date, '販売開始日' %><br>
+    <%= f.datetime_field :start_date %>
+  </div>
+
+  <div>
+    <%= f.label :end_date, '販売終了日' %><br>
+    <%= f.datetime_local_field :end_date %>
+  </div>
+
+  <div>
+    <%= f.label :version, '商品バージョン' %><br>
+    <%= f.text_field :version %>
+  </div>
+
+  <div>
+    <%= f.label :active, '状態' %><br>
+    <%= f.check_box :active, {}, true, false %>
+    <%= f.label :active, '有効' %>
+  </div>
+
+  <br>
+  <br>
+
+  <div>
+    <%= f.submit '保存', class: 'btn btn-primary' %>
+    <%= link_to 'キャンセル', admin_products_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

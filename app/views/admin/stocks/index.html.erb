@@ -1,2 +1,42 @@
-<h1>Admin::Stocks#index</h1>
-<p>Find me in app/views/admin/stocks/index.html.erb</p>
+<h1>在庫管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品コード</th>
+      <th>商品名</th>
+      <th>在庫数</th>
+      <th>仕入れ価格</th>
+      <th>サプライヤー</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.product.code %></td>
+        <td><%= stock.product.name %></td>
+        <td><%= stock.quantity %></td>
+        <td><%= stock.purchase_price %></td>
+        <td><%= stock.supplier %></td>
+        <td>
+          <%= form_with model: stock, url: replenish_admin_stock_path(stock), method: :patch, local: true do |form| %>
+            <div>
+              <%= form.label :quantity, '数量' %>
+              <%= form.number_field :quantity, min: 1, required: true %>
+            </div>
+            <div>
+              <%= form.label :purchase_price, '仕入れ価格' %>
+              <%= form.number_field :purchase_price, min: 0, required: true %>
+            </div>
+            <div>
+              <%= form.label :supplier, 'サプライヤー' %>
+              <%= form.text_field :supplier, required: true %>
+            </div>
+            <%= form.submit '補充', class: 'btn btn-primary' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

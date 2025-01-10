@@ -1,2 +1,12 @@
 <h1>Admin::Dashboard#index</h1>
-<p>Find me in app/views/admin/dashboard/index.html.erb</p>
+<p>登録ユーザー数: <%= @user_count %></p>
+<p>登録商品数: <%= @product_count %></p>
+<p>在庫合計: <%= @stock_count %></p>
+
+<nav>
+  <ul>
+    <li><%= link_to 'ユーザー管理', admin_users_path %></li>
+    <li><%= link_to '商品管理', admin_products_path %></li>
+    <li><%= link_to '在庫管理', admin_stocks_path %></li>
+  </ul>
+</nav>
